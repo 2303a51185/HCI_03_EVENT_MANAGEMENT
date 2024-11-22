@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - TH Events</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Crimson Text', serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .top-nav {
+            background-color: #000;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #C5A572;
+            font-size: 2rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #C5A572;
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 8rem 0 3rem;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://d1zpvjny0s6omk.cloudfront.net/media/fileupload/2016/06/06/ceremony-shepherd-hooks_Schorr-Menkus_Embrace-Life-Photography-resized.jpg') center/cover;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            color: #C5A572;
+        }
+
+        .payment-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .payment-details {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .payment-details h2 {
+            font-size: 2rem;
+            color: #C5A572;
+            margin-bottom: 1rem;
+        }
+
+        .payment-details p {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .payment-form label {
+            margin: 0.5rem 0;
+            font-size: 1rem;
+            color: #C5A572;
+        }
+
+        .payment-form input {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            border-radius: 5px;
+            border: 1px solid #C5A572;
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .pay-button {
+            padding: 1rem 2rem;
+            background-color: #C5A572;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+        }
+
+        .pay-button:hover {
+            background-color: #a68a5a;
+        }
+
+        .footer {
+            background-color: #000;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding ```html
+: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            color: #C5A572;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+
+        .pricing-table th, .pricing-table td {
+            border: 1px solid #C5A572;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .pricing-table th {
+            background-color: rgba(197, 167, 114, 0.3);
+        }
+
+        .total-row {
+            font-weight: bold;
+            background-color: rgba(197, 167, 114, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="#" class="logo">TH</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about (1).html">About</a>
+                <a href="Events.html">Events</a>
+                <a href="contact-page.html">Contact</a>
+                <a href="index (7).html">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-section">
+        <h1>Payment</h1>
+    </header>
+
+    <section class="payment-section">
+        <div class="payment-details">
+            <h2>Payment Summary</h2>
+            <p>Selected Items Total: ₹<span id="selectedItemsTotal">0</span></p>
+            <p>Attendees Cost: ₹<span id="attendeesCost">1200</span></p>
+            <h3>Grand Total: ₹<span id="grandTotal">0</span></h3>
+        </div>
+
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>Event Section</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Decoration Packages</td>
+                    <td>₹<span id="decorationTotal">5000</span></td>
+                </tr>
+                <tr>
+                    <td>Photography Packages</td>
+                    <td>₹<span id="photographyTotal">7000</span></td>
+                </tr>
+                <tr>
+                    <td>Food Options</td>
+                    <td>₹<span id="foodTotal">3000</span></td>
+                </tr>
+                <tr>
+                    <td>DJ Options</td>
+                    <td>₹<span id="djTotal">4000</span></td>
+                </tr>
+                <tr>
+                    <td>Gift Options</td>
+                    <td>₹<span id="giftTotal">2000</span></td>
+                </tr>
+                <tr class="total-row">
+                    <td>Total</td>
+                    <td>₹<span id="totalPricing">21000</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form class="payment-form">
+            <label for="cardName">Cardholder Name:</label>
+            <input type="text" id="cardName" placeholder="Enter your name" required>
+
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" placeholder="Enter card number" required>
+
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="text" id="expiryDate" placeholder="MM/YY" required>
+
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" placeholder="Enter CVV" required>
+
+            <button type="submit" class="pay-button">Pay Now</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="footer-logo">TH Events</div>
+                <p>Luxury Event Management Company</p>
+            </div>
+            <div class="reservations">
+                <p><strong>Contact Us:</strong></p>
+                <p>Phone: +999 888 77 22 </p>
+                <p>Email: contact@thevents.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Assuming you want to populate the payment summary from the previous page
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectedItemsTotal = localStorage.getItem('selectedItemsTotal') || 0;
+            const attendeesCost = 1200; // Fixed cost for 4 attendees at ₹300 each
+            const grandTotal = 21000; // Total from the pricing table
+
+            document.getElementById('selectedItemsTotal').innerText = selectedItemsTotal;
+            document.getElementById('attendeesCost').innerText = attendeesCost;
+            document.getElementById('grandTotal').innerText = grandTotal;
+
+            // Populate individual section totals
+            document.getElementById('decorationTotal').innerText = 5000;
+            document.getElementById('photographyTotal').innerText = 7000;
+            document.getElementById('foodTotal').innerText = 3000;
+            document.getElementById('djTotal').innerText = 4000;
+            document.getElementById('giftTotal').innerText = 2000;
+
+            // Calculate total pricing
+            const totalPricing = 5000 + 7000 + 3000 + 4000 + 2000;
+            document.getElementById('totalPricing').innerText = totalPricing;
+        });
+
+        // Handle form submission
+        document.querySelector('.payment-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            alert('Payment successful! Thank you for your purchase.');
+            // Optionally, redirect to a confirmation page or reset the form
+        });
+    </script>
+</body>
+</html>

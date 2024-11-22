@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TH Events - Luxury Event Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Crimson Text', serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .top-nav {
+            background-color: #000;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #C5A572;
+            font-size: 2rem;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #fff;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: #C5A572;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #C5A572;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .main-header {
+            text-align: center;
+            padding: 8rem 0 3rem;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://www.linandjirsa.com/wp-content/uploads/07-hyatt-regency-newport-beach-indian-wedding-photography-1.jpg') center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .main-header h {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .tagline {
+            font-style: italic;
+            color: #C5A572;
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .venue-section {
+            padding: 5rem 2rem;
+            background: #111;
+            opacity: 0;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .venue-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .venue-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .venue-image {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .venue-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .venue-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .venue-text {
+            padding: 2rem;
+        }
+
+        .venue-text h2 {
+            font-size: 2.5rem;
+            color: #C5A572;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .venue-text p {
+            line-height: 1.8;
+            margin-bottom: 1.5 rem;
+            color: #ccc;
+            font-size: 1.1rem;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .features-list li {
+            margin-bottom: 1rem;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-list li:before {
+            content: "•";
+            color: #C5A572;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .venue-cta {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: 2px solid #C5A572;
+            color: #C5A572;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .venue-cta:hover {
+            background: #C5A572;
+            color: #000;
+        }
+
+        .venue-cta::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 0;
+            bottom: 0;
+            left: 0;
+            background: #C5A572;
+            transition: height 0.3s;
+        }
+
+
+
+        .stats-section {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://th.bing.com/th/id/OIP.jfsdsaQ25Fq3V6sxr9EJDwHaE8?rs=1&pid=ImgDetMain') center/cover fixed;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            color: #C5A572;
+            margin-bottom: 1rem;
+        }
+
+        .stat-label {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        footer {
+            background: #000;
+            padding: 3rem 2rem;
+            color: #ccc;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+
+        .footer-info,
+        .reservations,
+        .mailing-list {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #C5A572;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            margin: 0.5rem 0;
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .subscribe-form input[type="email"] {
+            padding: 0.5rem;
+            flex: 1;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .subscribe-btn {
+            background: #C5A572;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .venue-section {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .venue-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <a href="#" class="logo">TH</a>
+            <div class="nav-links">
+                <!-- <a href="#visit">Visit Us</a> -->
+                <a href="about (1).html">About</a>
+                <a href="Events.html">Events</a>
+                <!-- <a href="#venues">Venues</a> -->
+                <a href="contact-page.html">Contact</a>
+                <a href="index (7).html">Login</a>
+            </div>
+        </div>
+    </nav>
+    <header class="main-header">
+        <h3>Making celebrations memorable and effortless. Turning your moments into lifelong memories.</h3>
+        <p class="tagline">Where Unforgettable Moments Come to Life</p>
+    </header>
+
+    <section class="venue-section">
+        <div class="venue-content">
+            <div class="venue-image">
+                <img src="https://karishmamanwani.com/wp-content/uploads/2020/04/20-Karishma-Manwani-Events-London-Wedding-Planner-Cowshi-Jugal-The-Savoy-Hotel-Tamil-Wedding-Gujarati-Wedding-Satnam-Photography-London-United-Kingdom-12-1536x1025.jpg" alt="Luxury Wedding Venue">
+            </div>
+            <div class="venue-text">
+                <h2>Wedding Events</h2>
+                <p>Experience the wedding of your dreams in our enchanting venue. Our stunning location offers the perfect backdrop for your special day, combining natural beauty with elegant architecture.</p>
+               
+                <a href="schedule-tour copy.html" class="venue-cta">Plan Your Event</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="venue-section">
+        <div class="venue-content">
+            <div class="venue-text">
+                <h2>Corporate & Social</h2>
+                <p>Transform your corporate events into memorable experiences. Our versatile spaces are designed to accommodate everything from intimate board meetings to large-scale conferences.</p>
+                
+                <a href="socialevents.html" class="venue-cta">Plan Your Event</a>
+            </div>
+            <div class="venue-image">
+                <img src="https://cdna.artstation.com/p/assets/images/images/018/723/194/large/ashish-vichare-banquet-hall-render.jpg?1560452149" alt="Corporate Event Space">
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Special Events Section -->
+    <section class="venue-section">
+        <div class="venue-content">
+            <div class="venue-image">
+                <img src="https://i.pinimg.com/originals/83/7c/52/837c52b29b0d8c752c76fe48ab08f0d4.jpg" alt="Special Events Venue">
+            </div>
+            <div class="venue-text">
+                <h2>Special Events</h2>
+                <p>Create lasting memories in our unique event spaces. Perfect for celebrations, galas, fundraisers, and any special occasion that deserves an extraordinary setting.</p>
+               
+                <a href="specialevents.html" class="venue-cta">Plan Your Event</a>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Events Hosted</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50,000</div>
+                <div class="stat-label">Happy Guests</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Satisfaction</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="footer-logo">TH Events</div>
+                <p>Luxury Event Management Company</p>
+            </div>
+            <div class="reservations">
+                <p><strong>Contact Us:</strong></p>
+                <p>Phone: +123 456 789</p>
+                <p>Email: contact@thevents.com</p>
+            </div>
+            <div class="mailing-list">
+                <p><strong>Join Our Mailing List</strong></p>
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Enter your email">
+                    <button type="submit" class="subscribe-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <p>&copy; 2024 TH Events. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+            );
+        }
+
+        function applyScrollAnimations() {
+            const sections = document.querySelectorAll('.venue-section');
+            sections.forEach(section => {
+                if (isInViewport(section)) {
+                    section.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', applyScrollAnimations);
+        window.addEventListener('load', applyScrollAnimations);
+    </script>
+</body>
+</html>
